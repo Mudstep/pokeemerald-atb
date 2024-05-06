@@ -890,7 +890,10 @@ u8 CreateBattlerHealthboxSprites(u8 battlerId)
             healthboxLeftSpriteId = CreateSprite(&sHealthboxOpponentSpriteTemplates[0], DISPLAY_WIDTH, DISPLAY_HEIGHT, 1);
             healthboxRightSpriteId = CreateSpriteAtEnd(&sHealthboxOpponentSpriteTemplates[0], DISPLAY_WIDTH, DISPLAY_HEIGHT, 1);
 
-            gSprites[healthboxRightSpriteId].oam.tileNum += 32;
+            gSprites[healthboxLeftSpriteId].oam.shape = ST_OAM_SQUARE;
+
+            gSprites[healthboxRightSpriteId].oam.shape = ST_OAM_SQUARE;
+            gSprites[healthboxRightSpriteId].oam.tileNum += 64;
 
             data6 = 2;
         }
@@ -1130,7 +1133,7 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
     else
     {
         objVram = (void *)(OBJ_VRAM0);
-        objVram += spriteTileNum + 0x400;
+        objVram += spriteTileNum + 0x800;
     }
     TextIntoHealthboxObject(objVram, windowTileData, 3);
     RemoveWindowOnHealthbox(windowId);
